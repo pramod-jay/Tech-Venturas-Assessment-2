@@ -1,0 +1,368 @@
+{
+	"info": {
+		"_postman_id": "613bf2b7-6d6f-4209-9c8a-5081ca847461",
+		"name": "TechVenturas",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "22018726"
+	},
+	"item": [
+		{
+			"name": "Gateway",
+			"item": [
+				{
+					"name": "Create Gateway",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"serialNumber\":\"S007\",\n    \"name\":\"Server 3\",\n    \"ipAddress\":\"192.168.1.7\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/gateway/createGateway",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"gateway",
+								"createGateway"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Fetch All Gateways",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8000/gateWay/getGateways",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"gateWay",
+								"getGateways"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update IP Address",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"serialNumber\":\"S001\",\n    \"ipAddress\":\"120.168.1.1\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/gateway/updateIp",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"gateway",
+								"updateIp"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Gateway",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"serialNumber\":\"S002\",\n    \"name\":\"PC2\",\n    \"ipAddress\":\"192.168.1.200\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/gateway/updateGateway",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"gateway",
+								"updateGateway"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Fetch Gateway by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8000/gateway/getGatewayById/?serialNumber=S002",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"gateway",
+								"getGatewayById",
+								""
+							],
+							"query": [
+								{
+									"key": "serialNumber",
+									"value": "S002"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Gateway",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8000/gateway/deleteGateway?serialNumber=S003",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"gateway",
+								"deleteGateway"
+							],
+							"query": [
+								{
+									"key": "serialNumber",
+									"value": "S003"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Device",
+			"item": [
+				{
+					"name": "Create Device",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"vendor\":\"Ricon\",\n    \"isOnline\":true,\n    \"serialNumber\":\"S001\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/device/createDevice",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"device",
+								"createDevice"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Fetch All Devices",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8000/device/getDevices",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"device",
+								"getDevices"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Status of Device",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"UID\":15,\n    \"isOnline\":true\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/device/updateStatus",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"device",
+								"updateStatus"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Gateway of Device",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"UID\":15,\n    \"serialNumber\":\"S007\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/device/updateGateway",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"device",
+								"updateGateway"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Device",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"UID\":1,\n    \"vendor\":\"HP\",\n    \"isOnline\":true,\n    \"serialNumber\":\"S005\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/device/updateDevice",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"device",
+								"updateDevice"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Fetch Device by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8000/device/getDeviceById?UID=3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"device",
+								"getDeviceById"
+							],
+							"query": [
+								{
+									"key": "UID",
+									"value": "3"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Device",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8000/device/deleteDevice?UID=3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"device",
+								"deleteDevice"
+							],
+							"query": [
+								{
+									"key": "UID",
+									"value": "3"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
