@@ -1,73 +1,60 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
+# Tech-Venturas-Assessment-2
+## TV GATEWAY MANAGEMENT PORTAL
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+### Overview
+The TV Gateway Management Portal provides a RESTful API suite for managing gateways and their associated peripheral devices. It enables users to perform CRUD operations on gateways and devices, ensuring validation of fields and adherence to predefined constraints.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+### Build With
+The project is implemented using the following frameworks and Databases
+* [![NestJS](https://img.shields.io/badge/NestJS-Framework-ea2845?logo=nestjs)](https://nestjs.com/)
+* ![MySQL](https://img.shields.io/badge/MySQL-4479A1?style=flat&logo=mysql&logoColor=white)
 
-## Description
+## Getting Started
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+### Prerequisites
+* ![npm version](https://img.shields.io/badge/npm-v10.3.3-blue)
+* ![Postman](https://img.shields.io/badge/Postman-FF6C37?style=flat&logo=postman&logoColor=white)
 
-## Installation
+## Implementation
+Steps to implement and set up the project:
+1. Clone the repo
+    ```sh
+   git clone https://github.com/pramod-jay/Tech-Venturas-Assessment-2.git
+   ```
+    
+2. Database Implementation
+  <br/>The MySQL database server is hosted on Azure flexible server, eliminating the need for database server implementation locally. Details regarding the database configuration can be found in the <b>‘.env’</b> file in the root directory.
 
-```bash
-$ npm install
-```
+3. Open the project with a preferred IDE such as VSCode, IntelliJ IDEA.
+   <br/>(Completion of successful opening will result in the project with the following folders and files)
+<img width="214" alt="Screenshot 2024-02-29 at 01 32 14" src="https://github.com/pramod-jay/Tech-Venturas-Assessment-2/assets/91390000/fc1c15a6-1b91-482f-ab90-0bd4be76e6bb">
 
-## Running the app
+4. Install NPM packages
+   ```sh
+   npm install
+   ```
+5. Run the servers
+    ```sh
+    # develpoment
+   npm run start
+   ```
 
-```bash
-# development
-$ npm run start
+    ```sh
+    # watch mode
+   npm run start:dev
+   ```
 
-# watch mode
-$ npm run start:dev
+_P.S.: Installation of node modules will be necessary at the initial stage, and it will only require ‘npm start’ command for the rest of the testing._
 
-# production mode
-$ npm run start:prod
-```
+6. Import <b>TechVenturas.postman_collection.json</b> to the Postman which is in the root folder.
+<img width="327" alt="Screenshot 2024-02-29 at 01 39 49" src="https://github.com/pramod-jay/Tech-Venturas-Assessment-2/assets/91390000/784efaff-482b-456b-b819-8a07a078b9cc">
 
-## Test
+   
+7. Now the environment is ready for testing via Postman.👏<br/>
+<img width="260" alt="Screenshot 2024-02-29 at 01 42 25" src="https://github.com/pramod-jay/Tech-Venturas-Assessment-2/assets/91390000/db50ad8d-159f-4e7a-9e63-654801e3b3a2">
 
-```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
-```
-
-## Support
-
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](LICENSE).
+## Assumptions
+* A gateway requires a name and an IP address.
+* Peripheral devices are not mandatory for a gateway; they can exist independently.
+* Peripheral devices can also exist without being associated with a gateway.
+* If a gateway is deleted, the connected peripheral devices may not be deleted; instead, the foreign keys indicating the devices' connection to the gateway will become null.
