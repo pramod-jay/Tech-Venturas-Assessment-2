@@ -19,7 +19,7 @@ export class DeviceService{
 
     async createDevice(deviceDto:DeviceDto, response: Response){
         try {
-            if(deviceDto.vendor === ''){
+            if(deviceDto.vendor == ''){
                 return response.status(HttpStatus.BAD_REQUEST).send("Vendor cannot be null");
             }
     
@@ -35,9 +35,9 @@ export class DeviceService{
                     return response.status(HttpStatus.NOT_FOUND).send("Gateway not found");
                 }
     
-                const rowCount = await this.gatewayRepository.query(`SELECT COUNT(uid) as rowCount FROM techventuras.device WHERE gatewaySerialNumber = '${deviceDto.serialNumber}'`);
+                const rowCount =  await this.deviceRepository.countBy({gateway: gateway});
     
-                if(rowCount[0].rowCount == 10){
+                if(rowCount == 10){
                     return response.status(HttpStatus.BAD_REQUEST).send("Cannot connect devices more than 10 to the device -> " + deviceDto.serialNumber);
                 }
             }
@@ -73,64 +73,75 @@ export class DeviceService{
         }
     }
 
-    async updateStatus(deviceDto: DeviceDto, response: Response){
+    async patchDevice(uid: number, deviceDto: DeviceDto, response: Response){
         try {
-            const isDeviceExist = await this.isDeviceExist(deviceDto.UID);
+            const isDeviceExist = await this.isDeviceExist(uid);
             if(!isDeviceExist){
                 return response.status(HttpStatus.NOT_FOUND).send("Device not found");
             }
     
-            let device = await this.deviceRepository.findOneBy({UID:deviceDto.UID});
-            device.isOnline = deviceDto.isOnline;
-    
-            const result = await this.deviceRepository.save(device);
-            console.log(result);
-            return response.status(HttpStatus.ACCEPTED).send("Status of device has been updated successfully");
-        } catch (error) {
-            console.log(error);
-            return response.status(HttpStatus.INTERNAL_SERVER_ERROR).send("Internal server error");
-        }
-    }
+            let device = await this.deviceRepository.findOneBy({UID:uid});
 
-    async updateGateway(deviceDto: DeviceDto, response: Response){
-        try {
-            const isDeviceExist = await this.isDeviceExist(deviceDto.UID);
-            if(!isDeviceExist){
-                return response.status(HttpStatus.NOT_FOUND).send("Device not found");
-            }
+            if(deviceDto.isOnline != null && deviceDto.serialNumber != null){
+                let result = this.updateStatus(device, deviceDto);
+                if(result){
+                    let gateway = await this.gatewayRepository.findOneBy({serialNumber: deviceDto.serialNumber});
+                    if(gateway == null){
+                        return response.status(HttpStatus.NOT_FOUND).send("Gateway not found");
+                    }
 
-            let gateway = null;
-    
-            if (deviceDto.serialNumber != '') {
-                gateway = await this.gatewayRepository.findOneBy({serialNumber: deviceDto.serialNumber});
+                    const rowCount =  await this.deviceRepository.countBy({gateway: gateway});
+            
+                    if(rowCount == 10){
+                        return response.status(HttpStatus.BAD_REQUEST).send("Cannot connect devices more than 10 to the device -> " + deviceDto.serialNumber);
+                    }
+
+                    result = this.updateGateway(device, gateway);
+                    if(result){
+                        return response.status(HttpStatus.ACCEPTED).send("Status and gateway of device have been updated successfully");
+                    }else{
+                        return response.status(HttpStatus.INTERNAL_SERVER_ERROR).send("Internal server error");
+                    }
+                }else{
+                    return response.status(HttpStatus.INTERNAL_SERVER_ERROR).send("Internal server error");
+                }
+            }else if(deviceDto.isOnline != null){
+                let result = this.updateStatus(device, deviceDto);
+                if(result){
+                    return response.status(HttpStatus.ACCEPTED).send("Status of device has been updated successfully");
+                }else{
+                    return response.status(HttpStatus.INTERNAL_SERVER_ERROR).send("Internal server error");
+                }
+            }else if(deviceDto.serialNumber != null){
+                let gateway = await this.gatewayRepository.findOneBy({serialNumber: deviceDto.serialNumber});
                 if(gateway == null){
                     return response.status(HttpStatus.NOT_FOUND).send("Gateway not found");
                 }
+
+                const rowCount =  await this.deviceRepository.countBy({gateway: gateway});
         
-                const rowCount = await this.gatewayRepository.query(`SELECT COUNT(uid) as rowCount FROM techventuras.device WHERE gatewaySerialNumber = '${deviceDto.serialNumber}'`);
-            
-                if(rowCount[0].rowCount == 10){
+                if(rowCount == 10){
                     return response.status(HttpStatus.BAD_REQUEST).send("Cannot connect devices more than 10 to the device -> " + deviceDto.serialNumber);
                 }
+
+                let result = this.updateGateway(device, gateway);
+                if(result){
+                    return response.status(HttpStatus.ACCEPTED).send("Gateway of device have been updated successfully");
+                }else{
+                    return response.status(HttpStatus.INTERNAL_SERVER_ERROR).send("Internal server error");
+                }
+            }else{
+                return response.status(HttpStatus.BAD_REQUEST).send("Please send status or gateway serial number");
             }
-    
-            let device = await this.deviceRepository.findOneBy({UID: deviceDto.UID});
-            device.gateway = gateway;
-    
-            const result = await this.deviceRepository.save(device);
-    
-            console.log(result);
-    
-            return response.status(HttpStatus.ACCEPTED).send("Gateway of device has been updated successfully");
         } catch (error) {
             console.log(error);
             return response.status(HttpStatus.INTERNAL_SERVER_ERROR).send("Internal server error");
         }
     }
 
-    async updateDevice(deviceDto: DeviceDto, response: Response){
+    async updateDevice(uid: number, deviceDto: DeviceDto, response: Response){
         try {
-            const isDeviceExist = await this.isDeviceExist(deviceDto.UID);
+            const isDeviceExist = await this.isDeviceExist(uid);
             if(!isDeviceExist){
                 return response.status(HttpStatus.NOT_FOUND).send("Device not found");
             }
@@ -150,15 +161,15 @@ export class DeviceService{
                 if(gateway == null){
                     return response.status(HttpStatus.NOT_FOUND).send("Gateway not found");
                 }
+               
+                const rowCount =  await this.deviceRepository.countBy({gateway: gateway});
     
-                const rowCount = await this.gatewayRepository.query(`SELECT COUNT(uid) as rowCount FROM techventuras.device WHERE gatewaySerialNumber = '${deviceDto.serialNumber}'`);
-    
-                if(rowCount[0].rowCount == 10){
+                if(rowCount == 10){
                     return response.status(HttpStatus.BAD_REQUEST).send("Cannot connect devices more than 10 to the device -> " + deviceDto.serialNumber);
                 }
             }
     
-            let device = await this.deviceRepository.findOneBy({UID:deviceDto.UID});
+            let device = await this.deviceRepository.findOneBy({UID:uid});
             device.dateCreated = new Date(moment().format('yyyy-MM-DD'));
             device.isOnline = deviceDto.isOnline;
             device.vendor = deviceDto.vendor;
@@ -175,9 +186,9 @@ export class DeviceService{
         }
     }
 
-    async getDeviceByID(deviceDto: DeviceDto, response: Response){
+    async getDeviceByID(uid: number, response: Response){
         try {
-            const device = await this.deviceRepository.findOneBy({UID:deviceDto.UID});
+            const device = await this.deviceRepository.findOneBy({UID:uid});
             if(device == null){
                 return response.status(HttpStatus.NOT_FOUND).send("Device not found");
             }
@@ -189,14 +200,14 @@ export class DeviceService{
         }
     }
 
-    async deleteDevice(deviceDto: DeviceDto, response: Response){
+    async deleteDevice(uid: number, response: Response){
         try {
-            const isDeviceExist = await this.isDeviceExist(deviceDto.UID);
+            const isDeviceExist = await this.isDeviceExist(uid);
             if(!isDeviceExist){
                 return response.status(HttpStatus.NOT_FOUND).send("Device not found");
             }
     
-            const result = await this.deviceRepository.delete({UID: deviceDto.UID});
+            const result = await this.deviceRepository.delete({UID: uid});
             
             console.log(result);
     
@@ -204,6 +215,30 @@ export class DeviceService{
         } catch (error) {
             console.log(error);
             return response.status(HttpStatus.INTERNAL_SERVER_ERROR).send("Internal server error");
+        }
+    }
+
+    private async updateGateway(device:Device, gateway: Gateway):Promise<boolean>{
+        try {
+            device.gateway = gateway;
+            const result = await this.deviceRepository.save(device);
+            console.log(result);
+            return true;
+        } catch (error) {
+            console.log(error);
+            return false;   
+        }
+    }
+
+    private async updateStatus(device:Device, deviceDto: DeviceDto):Promise<boolean>{
+        try {
+            device.isOnline = deviceDto.isOnline;
+            const result = await this.deviceRepository.save(device);
+            console.log(result);
+            return true;
+        } catch (error) {
+            console.log(error);
+            return false;
         }
     }
     

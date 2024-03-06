@@ -62,17 +62,13 @@ export class GatewayService {
     }
   }
 
-  async updateIp(gatewayDto:GatewayDto, response: Response){
+  async updateIp(serialNumber: string, gatewayDto:GatewayDto, response: Response){
     try {
-      if(gatewayDto.serialNumber === ''){
-        return response.status(HttpStatus.BAD_REQUEST).send("Serial number cannot be null");
-      }
-  
       if(gatewayDto.ipAddress === ''){
         return response.status(HttpStatus.BAD_REQUEST).send("Gateway IP address cannot be null");
       }
   
-      const isGatewayExist = await this.isGatewayExist(gatewayDto.serialNumber);
+      const isGatewayExist = await this.isGatewayExist(serialNumber);
       if(!isGatewayExist){
         return response.status(HttpStatus.NOT_FOUND).send("Gateway not found");
       }
@@ -81,7 +77,7 @@ export class GatewayService {
         return response.status(HttpStatus.BAD_REQUEST).send("IP is not a valid IPv4 address");
       }
   
-      const gateway = await this.gatewayRepository.findOneBy({serialNumber: gatewayDto.serialNumber});
+      const gateway = await this.gatewayRepository.findOneBy({serialNumber: serialNumber});
       gateway.IpAddress = gatewayDto.ipAddress
       const result = await this.gatewayRepository.save(gateway);
       
@@ -93,12 +89,8 @@ export class GatewayService {
     }
   }
 
-  async updateGateway(gatewayDto: GatewayDto, response:Response){
+  async updateGateway(serialNumber: string, gatewayDto: GatewayDto, response:Response){
     try {
-      if(gatewayDto.serialNumber === ''){
-        return response.status(HttpStatus.BAD_REQUEST).send("Serial number cannot be null");
-      }
-  
       if(gatewayDto.name === ''){
         return response.status(HttpStatus.BAD_REQUEST).send("Gateway name cannot be null");
       }
@@ -107,7 +99,7 @@ export class GatewayService {
         return response.status(HttpStatus.BAD_REQUEST).send("Gateway IP address cannot be null");
       }
   
-      const isGatewayExist = await this.isGatewayExist(gatewayDto.serialNumber);
+      const isGatewayExist = await this.isGatewayExist(serialNumber);
       if(!isGatewayExist){
         return response.status(HttpStatus.NOT_FOUND).send("Gateway not found");
       }
@@ -116,7 +108,7 @@ export class GatewayService {
         return response.status(HttpStatus.BAD_REQUEST).send("IP is not a valid IPv4 address");
       }
   
-      const gateway = await this.gatewayRepository.findOneBy({serialNumber: gatewayDto.serialNumber});
+      const gateway = await this.gatewayRepository.findOneBy({serialNumber: serialNumber});
       gateway.name = gatewayDto.name;
       gateway.IpAddress = gatewayDto.ipAddress;
   
@@ -130,18 +122,14 @@ export class GatewayService {
     }
   }
 
-  async getGatewayByID(gatewayDto: GatewayDto, response: Response){
-    try {
-      if(gatewayDto.serialNumber === ''){
-        return response.status(HttpStatus.BAD_REQUEST).send("Serial number cannot be null");
-      }
-  
-      const isGatewayExist = await this.isGatewayExist(gatewayDto.serialNumber);
+  async getGatewayByID(serialNumber: string, response: Response){
+    try {  
+      const isGatewayExist = await this.isGatewayExist(serialNumber);
       if(!isGatewayExist){
         return response.status(HttpStatus.NOT_FOUND).send("Gateway not found");
       }
   
-      const result = await this.gatewayRepository.findOneBy({serialNumber:gatewayDto.serialNumber});
+      const result = await this.gatewayRepository.findOneBy({serialNumber: serialNumber});
       return response.status(HttpStatus.ACCEPTED).send(result);
     } catch (error) {
       console.log(error);
@@ -149,14 +137,14 @@ export class GatewayService {
     }
   }
 
-  async deleteGateway(gatewayDto: GatewayDto, response: Response){
+  async deleteGateway(serialNumber: string, response: Response){
     try {
-      const isGatewayExist = await this.isGatewayExist(gatewayDto.serialNumber);
+      const isGatewayExist = await this.isGatewayExist(serialNumber);
       if(!isGatewayExist){
         return response.status(HttpStatus.NOT_FOUND).send("Gateway not found");
       }
   
-      const result = await this.gatewayRepository.delete({serialNumber: gatewayDto.serialNumber});
+      const result = await this.gatewayRepository.delete({serialNumber: serialNumber});
   
       console.log(result);
   

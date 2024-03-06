@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Patch, Post, Put, Query, Res } from "@nestjs/common";
+import { Body, Controller, Delete, Get, Param, Patch, Post, Put, Query, Res } from "@nestjs/common";
 import { DeviceService } from "./device.service";
 import { DeviceDto } from "./dto/device.dto";
 import { Response } from "express";
@@ -7,38 +7,33 @@ import { Response } from "express";
 export class DeviceController{
     constructor(private deviceService: DeviceService) {}
 
-    @Post('createDevice')
+    @Post()
     createDevice(@Body() deviceDto: DeviceDto, @Res() response: Response){
         return this.deviceService.createDevice(deviceDto, response);
     }
 
-    @Get('getDevices')
+    @Get()
     getDevices(@Res() response: Response){
         return this.deviceService.getDevices(response);
     }
 
-    @Patch('updateStatus')
-    updateStatus(@Body() deviceDto: DeviceDto, @Res() response: Response){
-        return this.deviceService.updateStatus(deviceDto, response);
+    @Patch(':uid')
+    updateStatus(@Param() params: any, @Body() deviceDto: DeviceDto, @Res() response: Response){
+        return this.deviceService.patchDevice(params.uid, deviceDto, response);
     }
 
-    @Patch('updateGateway')
-    updateGateway(@Body() deviceDto: DeviceDto, @Res() response: Response){
-        return this.deviceService.updateGateway(deviceDto, response);
+    @Put(':uid')
+    updateDevice(@Param() params: any, @Body() deviceDto: DeviceDto, @Res() response: Response){
+        return this.deviceService.updateDevice(params.uid, deviceDto, response);
     }
 
-    @Put('updateDevice')
-    updateDevice(@Body() deviceDto: DeviceDto, @Res() response: Response){
-        return this.deviceService.updateDevice(deviceDto, response);
+    @Get(':uid')
+    getDeviceByID(@Param() params: any, @Res() response: Response){
+        return this.deviceService.getDeviceByID(params.uid, response);
     }
 
-    @Get('getDeviceById')
-    getDeviceByID(@Query() deviceDto: DeviceDto, @Res() response: Response){
-        return this.deviceService.getDeviceByID(deviceDto, response);
-    }
-
-    @Delete('deleteDevice')
-    deleteDevcie(@Query() deviceDto: DeviceDto, @Res() response: Response){
-        return this.deviceService.deleteDevice(deviceDto, response);
+    @Delete(':uid')
+    deleteDevcie(@Param() params: any, @Res() response: Response){
+        return this.deviceService.deleteDevice(params.uid, response);
     }
 }

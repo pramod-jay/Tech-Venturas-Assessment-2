@@ -2,8 +2,6 @@ import { Module } from '@nestjs/common';
 import { GatewayModule } from './gateway/gateway.module';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { Gateway } from './gateway/gateway.entity';
-import { Device } from './device/device.entity';
 import { DeviceModule } from './device/device.module';
 
 @Module({

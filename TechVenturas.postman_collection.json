@@ -16,7 +16,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"serialNumber\":\"S007\",\n    \"name\":\"Server 3\",\n    \"ipAddress\":\"192.168.1.7\"\n}",
+							"raw": "{\n    \"serialNumber\":\"S009\",\n    \"name\":\"PC 5\",\n    \"ipAddress\":\"192.168.1.8\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -24,15 +24,14 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8000/gateway/createGateway",
+							"raw": "http://localhost:8000/gateway",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8000",
 							"path": [
-								"gateway",
-								"createGateway"
+								"gateway"
 							]
 						}
 					},
@@ -44,15 +43,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8000/gateWay/getGateways",
+							"raw": "http://localhost:8000/gateway",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8000",
 							"path": [
-								"gateWay",
-								"getGateways"
+								"gateway"
 							]
 						}
 					},
@@ -65,7 +63,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"serialNumber\":\"S001\",\n    \"ipAddress\":\"120.168.1.1\"\n}",
+							"raw": "{\n    \"ipAddress\":\"120.168.1.90\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -73,7 +71,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8000/gateway/updateIp",
+							"raw": "http://localhost:8000/gateway/S001",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -81,7 +79,7 @@
 							"port": "8000",
 							"path": [
 								"gateway",
-								"updateIp"
+								"S001"
 							]
 						}
 					},
@@ -94,7 +92,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"serialNumber\":\"S002\",\n    \"name\":\"PC2\",\n    \"ipAddress\":\"192.168.1.200\"\n}",
+							"raw": "{\n    \"name\":\"PC1\",\n    \"ipAddress\":\"192.168.1.20\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -102,7 +100,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8000/gateway/updateGateway",
+							"raw": "http://localhost:8000/gateway/S002",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -110,7 +108,7 @@
 							"port": "8000",
 							"path": [
 								"gateway",
-								"updateGateway"
+								"S002"
 							]
 						}
 					},
@@ -122,7 +120,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8000/gateway/getGatewayById/?serialNumber=S002",
+							"raw": "http://localhost:8000/gateway/S001",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -130,14 +128,7 @@
 							"port": "8000",
 							"path": [
 								"gateway",
-								"getGatewayById",
-								""
-							],
-							"query": [
-								{
-									"key": "serialNumber",
-									"value": "S002"
-								}
+								"S001"
 							]
 						}
 					},
@@ -149,7 +140,7 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8000/gateway/deleteGateway?serialNumber=S003",
+							"raw": "http://localhost:8000/gateway/S009",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -157,13 +148,7 @@
 							"port": "8000",
 							"path": [
 								"gateway",
-								"deleteGateway"
-							],
-							"query": [
-								{
-									"key": "serialNumber",
-									"value": "S003"
-								}
+								"S009"
 							]
 						}
 					},
@@ -181,7 +166,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"vendor\":\"Ricon\",\n    \"isOnline\":true,\n    \"serialNumber\":\"S001\"\n}",
+							"raw": "{\n    \"vendor\":\"Ricon\",\n    \"isOnline\":true,\n    \"serialNumber\":\"S005\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -189,15 +174,14 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8000/device/createDevice",
+							"raw": "http://localhost:8000/device",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8000",
 							"path": [
-								"device",
-								"createDevice"
+								"device"
 							]
 						}
 					},
@@ -209,28 +193,27 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8000/device/getDevices",
+							"raw": "http://localhost:8000/device",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8000",
 							"path": [
-								"device",
-								"getDevices"
+								"device"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "Update Status of Device",
+					"name": "Update gateway or status",
 					"request": {
 						"method": "PATCH",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"UID\":15,\n    \"isOnline\":true\n}",
+							"raw": "{\n    \"isOnline\":false,\n    \"serialNumber\":\"S002\"\n}\n\n// {\n//     \"isOnline\":false,\n// }\n\n// {\n//     \"serialNumber\":\"S002\"\n// }",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -238,7 +221,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8000/device/updateStatus",
+							"raw": "http://localhost:8000/device/27",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -246,36 +229,7 @@
 							"port": "8000",
 							"path": [
 								"device",
-								"updateStatus"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Update Gateway of Device",
-					"request": {
-						"method": "PATCH",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"UID\":15,\n    \"serialNumber\":\"S007\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:8000/device/updateGateway",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8000",
-							"path": [
-								"device",
-								"updateGateway"
+								"27"
 							]
 						}
 					},
@@ -288,7 +242,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"UID\":1,\n    \"vendor\":\"HP\",\n    \"isOnline\":true,\n    \"serialNumber\":\"S005\"\n}",
+							"raw": "{\n    \"vendor\":\"Apple\",\n    \"isOnline\":false,\n    \"serialNumber\":\"S002\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -296,7 +250,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8000/device/updateDevice",
+							"raw": "http://localhost:8000/device/1",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -304,7 +258,7 @@
 							"port": "8000",
 							"path": [
 								"device",
-								"updateDevice"
+								"1"
 							]
 						}
 					},
@@ -316,7 +270,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8000/device/getDeviceById?UID=3",
+							"raw": "http://localhost:8000/device/1",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -324,13 +278,7 @@
 							"port": "8000",
 							"path": [
 								"device",
-								"getDeviceById"
-							],
-							"query": [
-								{
-									"key": "UID",
-									"value": "3"
-								}
+								"1"
 							]
 						}
 					},
@@ -342,7 +290,7 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8000/device/deleteDevice?UID=3",
+							"raw": "http://localhost:8000/device/27",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -350,13 +298,7 @@
 							"port": "8000",
 							"path": [
 								"device",
-								"deleteDevice"
-							],
-							"query": [
-								{
-									"key": "UID",
-									"value": "3"
-								}
+								"27"
 							]
 						}
 					},
