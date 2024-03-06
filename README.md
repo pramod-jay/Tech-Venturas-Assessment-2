@@ -51,7 +51,8 @@ _P.S.: Installation of node modules will be necessary at the initial stage, and 
 
    
 7. Now the environment is ready for testing via Postman.👏<br/>
-<img width="260" alt="Screenshot 2024-02-29 at 01 42 25" src="https://github.com/pramod-jay/Tech-Venturas-Assessment-2/assets/91390000/db50ad8d-159f-4e7a-9e63-654801e3b3a2">
+<img width="260" alt="Screenshot 2024-03-06 at 18 07 30" src="https://github.com/pramod-jay/Tech-Venturas-Assessment-2/assets/91390000/634395a9-e329-4957-a3be-a248f66e7546">
+
 
 ## Assumptions
 * A gateway requires a name and an IP address.
